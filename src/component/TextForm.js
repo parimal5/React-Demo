@@ -13,13 +13,15 @@ export default function TextForm(props) {
 
   const handleClearText = () => {
     setText("");
-  }
+  };
 
   const [text, setText] = useState("");
 
   return (
     <>
-      <div className="container">
+      <div className="container" style={{
+              color: props.mode === "dark" ? "white" : "black",
+            }}>
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
@@ -28,6 +30,10 @@ export default function TextForm(props) {
             id="myBox1"
             onChange={handleOnChange}
             rows="8"
+            style={{
+              backgroundColor: props.mode === "dark" ? "#212529" : "white",
+              color : props.mode === "dark" ? "white" : "black",
+            }}
           ></textarea>
         </div>
         <button className="btn btn-primary" onClick={handleUpperCase}>
@@ -36,11 +42,13 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-1" onClick={handleLowerCase}>
           Convert to Lowercase
         </button>
-        <button className="btn btn-primary" onClick={handleClearText}> 
+        <button className="btn btn-primary" onClick={handleClearText}>
           Clear Text
         </button>
       </div>
-      <div className="container my-3">
+      <div className="container my-3" style={{
+              color: props.mode === "dark" ? "white" : "black",
+            }}>
         <h2>You text Summary</h2>
         <p>
           {text.split(" ").length} words {text.length} character
