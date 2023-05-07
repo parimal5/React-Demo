@@ -5,8 +5,9 @@ import Navbar from "./component/Navbar";
 import TextForm from "./component/TextForm";
 import React, { useState } from "react";
 
-function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+export default function App() {
   const [mode, setMode] = useState("light");
 
   // Enable Dark Background
@@ -61,24 +62,32 @@ function App() {
 
   return (
     <>
-      <Navbar
-        title="TextUtil"
-        mode={mode}
-        toggleMode={toggleMode}
-        toggleGreenMode={toggleGreenMode}
-        toggleBlueMode={toggleBlueMode}
-      />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <TextForm
-          showAlert={showAlert}
-          heading="Enter the text to analyze"
+      <Router>
+        <Navbar
+          title="TextUtil"
           mode={mode}
+          toggleMode={toggleMode}
+          toggleGreenMode={toggleGreenMode}
+          toggleBlueMode={toggleBlueMode}
         />
-        <About/>
-      </div>
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route exact path="/about" element={<About />}></Route>
+            <Route
+              exact
+              path="/"
+              element={
+                <TextForm
+                  showAlert={showAlert}
+                  heading="Enter the text to analyze"
+                  mode={mode}
+                />
+              }
+            ></Route>
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
-
-export default App;
