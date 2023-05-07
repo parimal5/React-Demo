@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
+  const [text, setText] = useState("");
+
   const handleUpperCase = () => {
     setText(text.toUpperCase());
+    props.showAlert("Converted to UpperCase..", "success");
   };
   const handleLowerCase = () => {
     setText(text.toLowerCase());
-  };
-  const handleOnChange = (event) => {
-    setText(event.target.value);
+    props.showAlert("Converted to Lower Case..", "success");
   };
 
   const handleClearText = () => {
     setText("");
+    props.showAlert("Text Cleared..", "success");
   };
 
-  const [text, setText] = useState("");
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
 
   return (
     <>
-      <div className="container" style={{
-              color: props.mode === "dark" ? "white" : "black",
-            }}>
+      <div
+        className="container"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
@@ -32,7 +39,7 @@ export default function TextForm(props) {
             rows="8"
             style={{
               backgroundColor: props.mode === "dark" ? "#212529" : "white",
-              color : props.mode === "dark" ? "white" : "black",
+              color: props.mode === "dark" ? "white" : "black",
             }}
           ></textarea>
         </div>
@@ -46,12 +53,15 @@ export default function TextForm(props) {
           Clear Text
         </button>
       </div>
-      <div className="container my-3" style={{
-              color: props.mode === "dark" ? "white" : "black",
-            }}>
+      <div
+        className="container my-3"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <h2>You text Summary</h2>
         <p>
-          {text.split(" ").length} words {text.length} character
+          {text.split(" ").length - 1} words {text.length} character
         </p>
         <p>It will tae you {0.08 * text.split(" ").length} Minutes to read.</p>
       </div>
